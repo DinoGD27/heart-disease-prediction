@@ -1,31 +1,47 @@
 from flask import Flask, render_template, request
-import pickle
 import numpy as np
+import pickle
+import os
+import gdown
 
 app = Flask(__name__)
 
-model = pickle.load(open("cardio_model.pkl", "rb"))
+# 🔽 Google Drive direct download link (unga link replace pannunga)
+url = "https://drive.google.com/uc?id=1AbCdEfGhIjKlMnOp"
+output = "cardio_model.pkl"
 
+# 🔽 Model file illana download pannum
+if not os.path.exists(output):
+    gdown.download(url, output, quiet=False)
+
+# 🔽 Model load
+model = pickle.load(open(output, "rb"))
+
+# 🔽 Home page
 @app.route('/')
 def home():
     return render_template("index.html")
 
+# 🔽 Prediction
 @app.route('/predict', methods=['POST'])
 def predict():
-    data = [float(x) for x in request.form.values()]
-    final = np.array([data])
+    try:
+        data = [float(x) for x in request.form.values()]
+        final_input = np.array([data])
 
-    prediction = model.predict(final)
+        prediction = model.predict(final_input)
 
-    if prediction[0] == 1:
-        result = "Heart Disease Detected"
-    else:
-        result = "No Heart Disease"
+        if prediction[0] == 1:
+            result = "⚠️ Heart Disease Detected"
+        else:
+            result = "✅ No Heart Disease"
 
-    return render_template("index.html", prediction_text=result)
+        return render_template("index.html", prediction_text=result)
 
-import os
+    except:
+        return render_template("index.html", prediction_text="Error in input ❌")
 
+# 🔽 Run app (Render compatible)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
