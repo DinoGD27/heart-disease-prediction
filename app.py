@@ -7,7 +7,7 @@ import gdown
 app = Flask(__name__)
 
 # 🔽 Google Drive direct download link (unga link replace pannunga)
-url = "https://drive.google.com/uc?id=1AbCdEfGhIjKlMnOp"
+url = "url = "https://drive.google.com/uc?export=download&id=12Obba6uTFVmkKxZkAI7Bb6hPzD60T2Ii""
 output = "cardio_model.pkl"
 
 # 🔽 Model file illana download pannum
