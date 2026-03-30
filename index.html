@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Prediction</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+        }
+
+        .container {
+            width: 350px;
+            margin: 80px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+            text-align: center;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 8px;
+            margin: 8px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Heart Disease Prediction</h2>
+
+    <form action="/predict" method="post">
+
+        <input name="age" placeholder="Age (years)" required>
+
+        <select name="gender">
+            <option value="">Gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+        </select>
+
+        <input name="height" placeholder="Height" required>
+        <input name="weight" placeholder="Weight" required>
+
+        <input name="ap_hi" placeholder="Systolic BP" required>
+        <input name="ap_lo" placeholder="Diastolic BP" required>
+
+        <select name="cholesterol">
+            <option value="">Cholesterol</option>
+            <option value="1">Normal</option>
+            <option value="2">Above Normal</option>
+            <option value="3">Well Above</option>
+        </select>
+
+        <select name="gluc">
+            <option value="">Glucose</option>
+            <option value="1">Normal</option>
+            <option value="2">Above Normal</option>
+            <option value="3">Well Above</option>
+        </select>
+
+        <select name="smoke">
+            <option value="">Smoke</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <select name="alco">
+            <option value="">Alcohol</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <select name="active">
+            <option value="">Physically Active</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <br>
+        <button type="submit">Predict</button>
+
+    </form>
+
+    <h3>{{ prediction_text }}</h3>
+</div>
+
+</body>
+</html>
